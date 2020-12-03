@@ -1,9 +1,11 @@
-import React from 'react';
 import { Switch, Route, Redirect } from "react-router-dom";
 import LandingPageFunction from './components/landingPage/index'
 import Login from './pages/loginPage/index'
 import HomeCliente from './pages/homeCliente/index'
 import HomeProfissional from './pages/homeProfissional/index'
+
+
+
 function Routes() {
     return (
         <Switch>
