@@ -1,3 +1,8 @@
-import {createConnection} from 'typeorm';
+import { Router } from 'express';
+import registerRouter from './register.routes'
 
-createConnection();
+const routes = Router();
+
+routes.use('/registers', registerRouter);
+
+export default routes;

@@ -1,8 +1,8 @@
 import { Switch, Route, Redirect } from "react-router-dom";
 import LandingPageFunction from './components/landingPage/index'
-import Login from './pages/loginPage/index'
-import HomeCliente from './pages/homeCliente/index'
-import HomeProfissional from './pages/homeProfissional/index'
+import Login from './database/pages/loginPage/index'
+import HomeCliente from './database/pages/homeCliente/index'
+import HomeProfissional from './database/pages/homeProfissional/index'
 
 
 

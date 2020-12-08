@@ -1,16 +1,43 @@
-import { RouterSharp } from '@material-ui/icons';
 import { Router } from 'express';
+import { parseISO } from 'date-fns';
+import { getRepository, getCustomRepository } from 'typeorm';
 
-import registerRouter from './register.routes';
+import RegistersRepository from '../database/repositories/RegistersRepository';
+import CreateRegisterService from '../database/services/CreateRegisterService';
 
-import './database';
+const RegistersRouter = Router();
 
-const routes = Router();
 
-routes.use('/register', registerRouter)
 
-registerRouter.post('/',  (request, response) => {
-    return response.json({ message: 'Hello World'});
-})
+RegistersRouter.get('/', (request, response) => {
 
-export default routes;
+   const registersRepository = getCustomRepository(RegistersRepository);
+
+   const registers = getRepository(RegistersRepository).find();
+
+  return response.json(registers);
+
+});
+
+RegistersRouter.post('/', async (request, response) => {
+    
+  try {
+    const { date_register } = request.body;
+
+    const parsedDate = parseISO(date_register);
+
+    const registersRepository = getCustomRepository(RegistersRepository);
+
+    const createRegister = new CreateRegisterService();
+
+    const register = await createRegister.execute({
+      date_register: parsedDate
+    });
+
+    return response.json(register);
+  } catch (err) {
+    return response.status(400).json({ error: err.message });
+  }
+});
+
+export default RegistersRouter;
