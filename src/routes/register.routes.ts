@@ -9,11 +9,11 @@ const RegistersRouter = Router();
 
 
 
-RegistersRouter.get('/', (request, response) => {
+RegistersRouter.get('/', async (request, response) => {
 
-   const registersRepository = getCustomRepository(RegistersRepository);
+   const registersRepository = await getCustomRepository(RegistersRepository);
 
-   const registers = getRepository(RegistersRepository).find();
+   const registers = await registersRepository.find();
 
   return response.json(registers);
 
